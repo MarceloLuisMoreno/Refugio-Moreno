@@ -1,17 +1,13 @@
-import NavBar from './components/NavBar';
+import NavBar from "./components/NavBar";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          BARRA DE MENU
-        </p>
-      </header>
-      <NavBar />
-    </div>
-  );
+   return (
+      <div className="App">
+         <header className="App-header">
+            <NavBar />
+         </header>
+      </div>
+   );
 }
 
 export default App;
- 
