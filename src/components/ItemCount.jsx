@@ -40,6 +40,7 @@ function ItemCount({ stock, initial, onAdd }) {
 					onClick={() => {
 						onAdd(count);
 					}}
+					variant="success"
 				>
 					Agregar al Carrito
 				</Button>

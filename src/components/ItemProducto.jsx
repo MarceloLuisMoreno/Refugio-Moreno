@@ -6,7 +6,7 @@ function ItemProducto({ stock, initial, onAdd }) {
 	return (
 		<div>
 			<Container>
-				<Row className="gx-5">
+				<Row className="gx-5  shadow p-3 mb-5 bg-white rounded">
 					<Col>
 						<img
 							src="\assets\productos\planta-1.jpg"
