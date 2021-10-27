@@ -1,49 +1,59 @@
-import { useState, useEffect } from "react";
-import { getFetch } from "./../services/getFetch";
 import Item from "./Item";
 import { Button } from "react-bootstrap";
+import { useState } from "react";
 
-const ItemList = () => {
-	const [item, setItem] = useState([]);
-	const [loading, setLoading] = useState(true);
+function ItemList({ items }) {
+	const [filtro, setFiltro] = useState("todos");
 
-	useEffect(() => {
-		getFetch
-			.then((res) => {
-				setItem(res);
-			})
-			.catch((err) => console.log(err))
-			.finally(() => setLoading(false));
-	}, []);
+	const plantas = () => {
+		setFiltro("plantas");
+	};
+	const cuadros = () => {
+		setFiltro("cuadros");
+	};
+	const macetas = () => {
+		setFiltro("macetas");
+	};
+	const vinilos = () => {
+		setFiltro("vinilos");
+	};
+	const todos = () => {
+		setFiltro("todos");
+	};
 
 	return (
 		<>
-			<h2>Listado de Productos</h2>
 			<div>
-				<Button variant="success">Plantas</Button>{" "}
-				<Button variant="success">Cuadros</Button>{" "}
-				<Button variant="success">Macetas</Button>{" "}
-				<Button variant="success">Vinilos</Button>{" "}
-				<Button variant="success">Todos</Button>
+				<Button onClick={todos} variant="success">
+					Todos
+				</Button>{" "}
+				<Button onClick={plantas} variant="success">
+					Plantas
+				</Button>{" "}
+				<Button onClick={cuadros} variant="success">
+					Cuadros
+				</Button>{" "}
+				<Button onClick={macetas} variant="success">
+					Macetas
+				</Button>{" "}
+				<Button onClick={vinilos} variant="success">
+					Vinilos
+				</Button>
 			</div>
-			{loading ? (
-				<h1>Cargando...</h1>
-			) : (
-				item.map((item) => (
-					<div className="d-inline-flex">
-						<Item
-							id={item.id}
-							tipo={item.tipo}
-							nombre={item.nombre}
-							descripcion={item.descripcion}
-							imagen={item.imagen}
-							precio={item.precio}
-							stock={item.stock}
-						/>
-					</div>
-				))
-			)}
+			{filtro === "todos"
+				? items.map((item) => (
+						<div className="d-inline-flex">
+							<Item key={item.id} item={item} />
+						</div>
+				  		))
+				: items
+						.filter((items) => items.tipo === filtro)
+						.map((item) => (
+							<div className="d-inline-flex">
+								<Item key={item.id} item={item} />
+							</div>
+						))}
 		</>
 	);
-};
+}
 export default ItemList;

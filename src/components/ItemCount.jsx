@@ -12,7 +12,7 @@ function ItemCount({ stock, initial, onAdd }) {
 	};
 
 	return (
-		<div>
+		<>
 			<Table >
 				<td>
 					<Button
@@ -45,7 +45,7 @@ function ItemCount({ stock, initial, onAdd }) {
 					Agregar al Carrito
 				</Button>
 			</div>
-		</div>
+		</>
 	);
 }
 
