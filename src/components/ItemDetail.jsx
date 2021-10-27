@@ -1,6 +1,6 @@
 import ItemCount from "./ItemCount";
 import "../styles/styles.css";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 function ItemDetail({ item, onAdd }) {
 	return (
