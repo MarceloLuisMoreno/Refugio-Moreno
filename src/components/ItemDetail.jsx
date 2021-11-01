@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function ItemDetail({ item, onAdd }) {
 	return (
-		<div>
+		<>
 			<Container className="p-2">
 				<br />
 				<Row className="gx-5  shadow p-3 mb-5 bg-white rounded">
@@ -39,7 +39,7 @@ function ItemDetail({ item, onAdd }) {
 					</Col>
 				</Row>
 			</Container>
-		</div>
+		</>
 	);
 }
 

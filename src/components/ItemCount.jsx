@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import {useState} from "react";
+import {Table, Button} from "react-bootstrap";
 
-function ItemCount({ stock, initial, onAdd }) {
+function ItemCount({stock, initial, onAdd}) {
 	const [count, setCount] = useState(initial);
 
 	return (
@@ -13,8 +13,7 @@ function ItemCount({ stock, initial, onAdd }) {
 						variant="light"
 						size="lg"
 						className="bi bi-dash-circle-fill"
-						disabled={count === 1}
-					></Button>
+						disabled={count === 1}></Button>
 				</td>
 				<td className="fs-3">{count}</td>
 				<td>
@@ -24,15 +23,15 @@ function ItemCount({ stock, initial, onAdd }) {
 						size="lg"
 						color="danger"
 						className="bi bi-plus-circle-fill"
-						disabled={count === stock}
-					></Button>
+						disabled={count === stock}></Button>
 				</td>
 			</Table>
 			<div className="text-center">
 				<Button
-					onClick={() => {onAdd(count)}}
-					variant="success"
-				>
+					onClick={() => {
+						onAdd(count);
+					}}
+					variant="success">
 					Agregar al Carrito
 				</Button>
 			</div>

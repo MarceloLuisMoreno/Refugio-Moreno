@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 
 function HomeContainer({ greeting }) {
 	return (
-		<div>
+		<>
 			<Container>
 				<h2 className="text-center pt-5 mt-5">{greeting}</h2>
 				<img
@@ -15,7 +15,7 @@ function HomeContainer({ greeting }) {
 				<br />
 				<br />
 			</Container>
-		</div>
+		</>
 	);
 }
 

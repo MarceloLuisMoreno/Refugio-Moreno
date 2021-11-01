@@ -5,7 +5,7 @@ import CardWidget from "./CardWidget";
 
 function NavBar() {
 	return (
-		<div>
+		<>
 			<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
 				<Container>
 					<Navbar.Brand as={Link} to="/">
@@ -46,7 +46,7 @@ function NavBar() {
 				</Container>
 			</Navbar>
 			<br />
-		</div>
+		</>
 	);
 }
 

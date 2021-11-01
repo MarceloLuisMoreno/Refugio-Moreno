@@ -10,7 +10,7 @@ function ItemListContainer() {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if ( categoryId === "todos" ) {
+		if (categoryId === "todos") {
 			getFetch
 				.then((res) => {
 					setItems(res);
@@ -19,18 +19,19 @@ function ItemListContainer() {
 				.finally(() => setLoading(false));
 		} else {
 			getFetch
-			.then((res) => {
-				setItems(res.filter(items => items.tipo === categoryId));
-			})
-			.catch((err) => alert(`Error: ${err}`))
-			.finally(() => setLoading(false));
+				.then((res) => {
+					setItems(res.filter((items) => items.tipo === categoryId));
+				})
+				.catch((err) => alert(`Error: ${err}`))
+				.finally(() => setLoading(false));
 		}
 	}, [categoryId]);
 
 	return (
-		<div>
+		<>
 			<Container>
-				<br /><br />
+				<br />
+				<br />
 				<h2 className="mt-5">Nuestros productos - {categoryId.toUpperCase()}</h2>
 				{loading ? (
 					<div className="spinner-border text-success" role="status">
@@ -40,7 +41,7 @@ function ItemListContainer() {
 					<ItemList items={items} />
 				)}
 			</Container>
-		</div>
+		</>
 	);
 }
 
