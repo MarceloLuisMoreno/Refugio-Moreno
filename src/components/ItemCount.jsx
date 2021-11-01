@@ -4,19 +4,12 @@ import { Table, Button } from "react-bootstrap";
 function ItemCount({ stock, initial, onAdd }) {
 	const [count, setCount] = useState(initial);
 
-	const masClick = () => {
-		setCount(count + 1);
-	};
-	const menosClick = () => {
-		setCount(count - 1);
-	};
-
 	return (
 		<>
-			<Table >
+			<Table>
 				<td>
 					<Button
-						onClick={menosClick}
+						onClick={() => setCount(count - 1)}
 						variant="light"
 						size="lg"
 						className="bi bi-dash-circle-fill"
@@ -26,7 +19,7 @@ function ItemCount({ stock, initial, onAdd }) {
 				<td className="fs-3">{count}</td>
 				<td>
 					<Button
-						onClick={masClick}
+						onClick={() => setCount(count + 1)}
 						variant="light"
 						size="lg"
 						color="danger"
@@ -37,9 +30,7 @@ function ItemCount({ stock, initial, onAdd }) {
 			</Table>
 			<div className="text-center">
 				<Button
-					onClick={() => {
-						onAdd(count);
-					}}
+					onClick={() => {onAdd(count)}}
 					variant="success"
 				>
 					Agregar al Carrito

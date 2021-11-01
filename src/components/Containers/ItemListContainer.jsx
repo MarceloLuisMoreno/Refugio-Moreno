@@ -1,37 +1,40 @@
 import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { getFetch } from "../../services/getFetch";
 import ItemList from "./../ItemList";
 
-function ItemListContainer({ greeting }) {
+function ItemListContainer() {
+	const { categoryId } = useParams();
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getFetch
+		if ( categoryId === "todos" ) {
+			getFetch
+				.then((res) => {
+					setItems(res);
+				})
+				.catch((err) => alert(`Error: ${err}`))
+				.finally(() => setLoading(false));
+		} else {
+			getFetch
 			.then((res) => {
-				setItems(res);
+				setItems(res.filter(items => items.tipo === categoryId));
 			})
-			.catch((err) => console.log(err))
+			.catch((err) => alert(`Error: ${err}`))
 			.finally(() => setLoading(false));
-	}, []);
+		}
+	}, [categoryId]);
 
 	return (
 		<div>
 			<Container>
-				<br />
-				<img
-					src="assets/img/productos.png"
-					className="container pt-5"
-					alt="Refugio Tienda Deco productos"
-				/>
-				<h2 className="text-center">{greeting}</h2>
-				<h2 className="text-center">Objetos de Diseño para tu casa</h2>
-				<br />
-				<h2>Nuestros productos</h2>
+				<br /><br />
+				<h2 className="mt-5">Nuestros productos - {categoryId.toUpperCase()}</h2>
 				{loading ? (
-					<div class="spinner-border text-success" role="status">
-						<span class="visually-hidden">Loading...</span>
+					<div className="spinner-border text-success" role="status">
+						<span className="visually-hidden">Loading...</span>
 					</div>
 				) : (
 					<ItemList items={items} />

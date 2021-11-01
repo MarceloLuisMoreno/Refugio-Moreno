@@ -1,6 +1,6 @@
 //Component NavBar
-
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Container, Navbar, Nav } from "react-bootstrap";
 import CardWidget from "./CardWidget";
 
 function NavBar() {
@@ -8,7 +8,7 @@ function NavBar() {
 		<div>
 			<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
 				<Container>
-					<Navbar.Brand href="#home">
+					<Navbar.Brand as={Link} to="/">
 						<img
 							src="/refugio.png"
 							className="d-inline-block align-top"
@@ -18,14 +18,24 @@ function NavBar() {
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="me-auto">
-							<Nav.Link href="#home">Home</Nav.Link>
-							<Nav.Link href="#nosotros">Nosotros</Nav.Link>
-							<Nav.Link href="#fotos">Fotos</Nav.Link>
-							<NavDropdown title="Productos" id="basic-nav-dropdown">
-								<NavDropdown.Item href="#cuadros">Cuadros</NavDropdown.Item>
-								<NavDropdown.Item href="#macetas">Macetas</NavDropdown.Item>
-								<NavDropdown.Item href="#plantas">Plantas</NavDropdown.Item>
-							</NavDropdown>
+							<Nav.Link as={Link} to="/">
+								Home
+							</Nav.Link>
+							<Nav.Link as={Link} to="/category/todos">
+								Productos
+							</Nav.Link>
+							<Nav.Link as={Link} to="/category/plantas">
+								Plantas
+							</Nav.Link>
+							<Nav.Link as={Link} to="/category/cuadros">
+								Cuadros
+							</Nav.Link>
+							<Nav.Link as={Link} to="/category/macetas">
+								Macetas
+							</Nav.Link>
+							<Nav.Link as={Link} to="/category/vinilos">
+								Vinilos
+							</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
 					<Nav>

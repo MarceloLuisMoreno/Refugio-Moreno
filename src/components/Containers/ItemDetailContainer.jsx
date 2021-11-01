@@ -1,35 +1,35 @@
 import { useState, useEffect } from "react";
 import { getItem } from "../../services/getItem";
-
 import ItemDetail from "./../ItemDetail";
+import { useParams } from "react-router-dom";
 
 function ItemDetailContainer() {
+	const { itemId } = useParams();
 	const onAdd = (count) => {
-		alert(`La cantidad del Item agregada al carrito es ${count}`);
+			alert(`La cantidad del Item agregada al carrito es ${count}`);
 	};
-
-	const [item, setItem] = useState({});
+	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		getItem
 			.then((res) => {
-				setItem(res);
+				setItems(res.find((item) => item.id === parseInt(itemId)));
 			})
-			.catch((err) => console.log(err))
+			.catch((err) => alert(`Error: ${err}`))
 			.finally(() => setLoading(false));
-	}, []);
+	}, [itemId]);
 
 	return (
 		<>
-			<h2>Item Detalle</h2>
-
+			<br />
+			<br />
 			{loading ? (
-				<div class="spinner-border text-success" role="status">
-					<span class="visually-hidden">Loading...</span>
+				<div className="spinner-border text-success" role="status">
+					<span className="visually-hidden">Loading...</span>
 				</div>
 			) : (
-				<ItemDetail item={item} onAdd={onAdd} />
+				<ItemDetail item={items} onAdd={onAdd} />
 			)}
 		</>
 	);
