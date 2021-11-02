@@ -1,8 +1,35 @@
 import {useState} from "react";
 import {Table, Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
+
+function InputCart({count, onAdd}) {
+	return (
+		<Button
+			variant="success"
+			onClick={() => {
+				onAdd(count);
+			}}>
+			Agregar al Carrito
+		</Button>
+	);
+}
+
+const InputBuy = () => {
+	return (
+		<Button as={Link} to="/cart" variant="primary">
+			Continuar la Compra
+		</Button>
+	);
+};
 
 function ItemCount({stock, initial, onAdd}) {
 	const [count, setCount] = useState(initial);
+
+	const [inputType, setInputType] = useState("input");
+
+	const handleInter = () => {
+		setInputType("buy");
+	};
 
 	return (
 		<>
@@ -26,14 +53,8 @@ function ItemCount({stock, initial, onAdd}) {
 						disabled={count === stock}></Button>
 				</td>
 			</Table>
-			<div className="text-center">
-				<Button
-					onClick={() => {
-						onAdd(count);
-					}}
-					variant="success">
-					Agregar al Carrito
-				</Button>
+			<div className="text-center" onClick={handleInter}>
+				{inputType === "input" ? <InputCart count={count} onAdd={onAdd} /> : <InputBuy />}
 			</div>
 		</>
 	);

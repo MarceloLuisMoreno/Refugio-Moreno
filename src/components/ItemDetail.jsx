@@ -1,11 +1,17 @@
 import ItemCount from "./ItemCount";
-import {Container, Row, Col} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function ItemDetail({item}) {
+function ItemDetail({ item }) {
+
+	const [cant, setCant] = useState(1);
+
 	const onAdd = (count) => {
-		alert(`La cantidad del Item agregada al carrito es ${count}`);
-	};
+			setCant(count)
+			alert(`Cantidad agregada al carrito es ${cant}`)
+	}
+
 	return (
 		<>
 			<Container className="p-2">
@@ -24,7 +30,7 @@ function ItemDetail({item}) {
 							<h5>{item.descripcion}</h5>
 							<h3>$ {item.precio}</h3>
 							<br />
-							<ItemCount stock={item.stock} initial={1} onAdd={onAdd} />
+							<ItemCount stock={item.stock} initial={cant} onAdd={onAdd} />
 							<button type="button" class="btn btn-outline-dark btn-sm m-1" disabled>
 								{item.stock} cantidades disponibles
 							</button>
