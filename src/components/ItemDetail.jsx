@@ -1,8 +1,11 @@
 import ItemCount from "./ItemCount";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {Container, Row, Col} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
-function ItemDetail({ item, onAdd }) {
+function ItemDetail({item}) {
+	const onAdd = (count) => {
+		alert(`La cantidad del Item agregada al carrito es ${count}`);
+	};
 	return (
 		<>
 			<Container className="p-2">

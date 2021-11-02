@@ -5,9 +5,6 @@ import { useParams } from "react-router-dom";
 
 function ItemDetailContainer() {
 	const { itemId } = useParams();
-	const onAdd = (count) => {
-		alert(`La cantidad del Item agregada al carrito es ${count}`);
-	};
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -29,7 +26,7 @@ function ItemDetailContainer() {
 					<span className="visually-hidden">Loading...</span>
 				</div>
 			) : (
-				<ItemDetail item={items} onAdd={onAdd} />
+				<ItemDetail item={items} />
 			)}
 		</>
 	);
