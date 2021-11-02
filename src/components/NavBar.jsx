@@ -39,7 +39,7 @@ function NavBar() {
 						</Nav>
 					</Navbar.Collapse>
 					<Nav>
-						<Nav.Link href="#carrito">
+						<Nav.Link as={Link} to="/cart">
 							<CardWidget cantidad="0" />
 						</Nav.Link>
 					</Nav>
