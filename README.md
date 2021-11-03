@@ -74,6 +74,9 @@ Actualmente cuenta con los siguientes Componentes:
 - `getFecth` : componente que nos devuelve un arreglo de objetos, que contiene el catálogo de productos.
 - `getItem` : nos devuelve un arreglo de objetos, con el detalle expandido de los productos.
 
+## Demo del Proyecto
+- [REFUGIO Tienda Deco](https://xenodochial-varahamihira-6b59cf.netlify.app/)
+
 ## Avance del Proyecto
 
 Vista del proyecto en ejecución:
