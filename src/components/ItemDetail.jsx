@@ -9,8 +9,9 @@ function ItemDetail({ item }) {
 
 	const onAdd = (count) => {
 			setCant(count)
-			alert(`Cantidad agregada al carrito es ${cant}`)
+			alert(`Cantidad agregada al carrito es ${count}`)
 	}
+	console.log(`Cantidad agregada al carrito es ${cant}`)
 
 	return (
 		<>
