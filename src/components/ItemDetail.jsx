@@ -5,13 +5,12 @@ import { useState } from "react";
 
 function ItemDetail({ item }) {
 
-	const [cant, setCant] = useState(1);
-
+	const [cantidad, setCantidad] = useState(1);
 	const onAdd = (count) => {
-			setCant(count)
+			setCantidad(count)
 			alert(`Cantidad agregada al carrito es ${count}`)
 	}
-	console.log(`Cantidad agregada al carrito es ${cant}`)
+	console.log(`Cantidad agregada al carrito es ${cantidad}`)
 
 	return (
 		<>
@@ -31,7 +30,7 @@ function ItemDetail({ item }) {
 							<h5>{item.descripcion}</h5>
 							<h3>$ {item.precio}</h3>
 							<br />
-							<ItemCount stock={item.stock} initial={cant} onAdd={onAdd} />
+							<ItemCount stock={item.stock} initial={cantidad} onAdd={onAdd} />
 							<button type="button" class="btn btn-outline-dark btn-sm m-1" disabled>
 								{item.stock} cantidades disponibles
 							</button>

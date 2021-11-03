@@ -27,7 +27,7 @@ function ItemCount({stock, initial, onAdd}) {
 
 	const [inputType, setInputType] = useState("input");
 
-	const handleInter = () => {
+	const handleInput = () => {
 		setInputType("buy");
 	};
 
@@ -53,7 +53,7 @@ function ItemCount({stock, initial, onAdd}) {
 						disabled={count === stock}></Button>
 				</td>
 			</Table>
-			<div className="text-center" onClick={handleInter}>
+			<div className="text-center" onClick={handleInput}>
 				{inputType === "input" ? <InputCart count={count} onAdd={onAdd} /> : <InputBuy />}
 			</div>
 		</>
