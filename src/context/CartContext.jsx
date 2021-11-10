@@ -33,13 +33,23 @@ const CartContextProvider = ({children}) => {
 		setCartList([]);
 	};
 
+	//Funcion para totalizar el Carrito
+    const totalCart = () => {
+        let total = 0;
+        cartList.forEach((item) => {
+            total += item.cantidad * item.precio;
+        });
+        return total;
+    };
+
 	return (
 		<CartContext.Provider
 			value={{
 				cartList,
 				addItem,
 				itemsCarrito,
-				clear
+				clear,
+				totalCart
 			}}>
 			{children}
 		</CartContext.Provider>
