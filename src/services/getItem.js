@@ -3,7 +3,7 @@ const productos = [
 		id: 1,
 		tipo: "plantas",
 		nombre: "Aloe",
-		descripcion: "Aloe Vera en maceta de cemento con plato de cemento. ",
+		descripcion: "Planta deAloe Vera en maceta de cemento con plato de cemento. Las macetas están pintadas en su exterior con impermeabilizante de acrílico transparente (al igual que los platos) y en su interior con pintura aslfáltica. El tamaño de la maceta es de 9 cmts de altura y 8 cmts de diámetro.",
 		imagen: "/assets/productos/planta-1.jpg",
 		precio: 1050,
 		stock: 10,

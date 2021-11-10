@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { getItem } from "../../services/getItem";
+import {useState, useEffect} from "react";
+import {getItem} from "../../services/getItem";
 import ItemDetail from "./../ItemDetail";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 function ItemDetailContainer() {
-	const { itemId } = useParams();
+	const {itemId} = useParams();
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 

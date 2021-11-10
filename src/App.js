@@ -1,16 +1,19 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 // BrowserRouter as Router, me permite poner Router en lugar de BrowerRouter
 import ItemListContainer from "./components/Containers/ItemListContainer";
 import NavBar from "./components/NavBar";
 import ItemDetailContainer from "./components/Containers/ItemDetailContainer";
 import HomeContainer from "./components/Containers/HomeContainer";
+import Cart from './components/Cart';
 import "./styles/styles.css";
-import { Cart } from './components/Cart';
+import CartContextProvider from "./context/CartContext";
 
 function App() {
+
 	return (
-		<div className="App">
-			<header className="appHeader">
+		<>
+		<div className="appHeader p-5">
+			<CartContextProvider>
 				<Router>
 					<NavBar />
 					<Switch>
@@ -22,8 +25,9 @@ function App() {
 						<Route exact path="/cart" component={Cart} />
 					</Switch>
 				</Router>
-			</header>
+			</CartContextProvider>
 		</div>
+		</>
 	);
 }
 
