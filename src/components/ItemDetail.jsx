@@ -35,7 +35,7 @@ function ItemDetail({item}) {
 								<br />
 								<br />
 								<Button as={Link} to="/cart" variant="secondary">
-									Continuar la Compra
+									Terminar Compra
 								</Button>
 								<br />
 							</>

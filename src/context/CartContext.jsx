@@ -28,19 +28,24 @@ const CartContextProvider = ({children}) => {
 		return cartList.reduce((prev, next) => prev + next.cantidad, 0);
 	};
 
-		// Funcion para poner a cero el carrito
+	// Funcion para poner a cero el carrito
 	const clear = () => {
 		setCartList([]);
 	};
 
+	// Funcion para eliminar un item del carrito
+	const clearItem = (id) => {
+		setCartList( cartList.filter(item => item.id !== id ));
+	};
+
 	//Funcion para totalizar el Carrito
-    const totalCart = () => {
-        let total = 0;
-        cartList.forEach((item) => {
-            total += item.cantidad * item.precio;
-        });
-        return total;
-    };
+	const totalCart = () => {
+		let total = 0;
+		cartList.forEach((item) => {
+			total += item.cantidad * item.precio;
+		});
+		return total;
+	};
 
 	return (
 		<CartContext.Provider
@@ -49,7 +54,8 @@ const CartContextProvider = ({children}) => {
 				addItem,
 				itemsCarrito,
 				clear,
-				totalCart
+				totalCart,
+				clearItem
 			}}>
 			{children}
 		</CartContext.Provider>
