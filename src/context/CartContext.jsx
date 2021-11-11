@@ -11,8 +11,7 @@ const CartContextProvider = ({children}) => {
 
 	//	Función para adicionar el item a cartList si no está en el carrito
 	function addItem(items) {
-		//		setCartList([...cartList, items]);
-		const cartListBak = [...cartList];
+ 		const cartListBak = [...cartList];
 		if (cartListBak.find((prod) => prod.id === items.item.id) !== undefined) {
 			//Sumo la cantidad en el item que ya está en el carrito
 			cartListBak.find((prod) => prod.id === items.item.id).cantidad += items.cantidad;
@@ -40,12 +39,8 @@ const CartContextProvider = ({children}) => {
 
 	//Funcion para totalizar el Carrito
 	const totalCart = () => {
-		let total = 0;
-		cartList.forEach((item) => {
-			total += item.cantidad * item.precio;
-		});
-		return total;
-	};
+		return cartList.reduce((total, item) => total + (item.cantidad * item.precio) ,0)
+		};
 
 	return (
 		<CartContext.Provider

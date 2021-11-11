@@ -1,9 +1,9 @@
-import { useCartContext } from "../context/CartContext";
-import { Button, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {useCartContext} from "../context/CartContext";
+import {Button, Container} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 function Cart() {
-	const { cartList, itemsCarrito, totalCart, clear, clearItem } = useCartContext();
+	const {cartList, itemsCarrito, totalCart, clear, clearItem} = useCartContext();
 
 	return (
 		<>
@@ -27,37 +27,40 @@ function Cart() {
 						<br />
 						<h1 className="mt-2 p-4">Carrito de compras</h1>
 						<table className="table table-bordered table-success text-center">
-							<tr>
-								<th>Id.</th>
-								<th>Cantidad</th>
-								<th>Descripción</th>
-								<th>Precio Unit</th>
-								<th>Subtotal</th>
-								<th>Eliminar</th>
-							</tr>
-							{cartList.map((prod) => (
-								<tr>
-									<td key={prod.id}>{prod.id}</td>
-									<td>{prod.cantidad}</td>
-									<td>{prod.nombre}</td>
-									<td>
-										{Intl.NumberFormat("es-AR", {
-											currency: "ARS",
-											style: "currency",
-										}).format(prod.precio)}
-									</td>
-									<td>
-
-										{Intl.NumberFormat("es-AR", {
-											currency: "ARS",
-											style: "currency",
-										}).format(prod.cantidad * prod.precio)}
-									</td>
-									<td
-										className="bi bi-trash-fill"
-										onClick={() => clearItem(prod.id)}></td>
-								</tr>
-							))}
+								<thead>
+									<tr className="fs-5 fw-bold">
+										<th>Id.</th>
+										<th>Cantidad</th>
+										<th>Descripción</th>
+										<th>Precio Unit</th>
+										<th>Subtotal</th>
+										<th>Eliminar</th>
+									</tr>
+								</thead>
+							<tbody>
+								{cartList.map((prod) => (
+									<tr key={prod.id}>
+										<td>{prod.id}</td>
+										<td>{prod.cantidad}</td>
+										<td>{prod.nombre}</td>
+										<td>
+											{Intl.NumberFormat("es-AR", {
+												currency: "ARS",
+												style: "currency",
+											}).format(prod.precio)}
+										</td>
+										<td>
+											{Intl.NumberFormat("es-AR", {
+												currency: "ARS",
+												style: "currency",
+											}).format(prod.cantidad * prod.precio)}
+										</td>
+										<td
+											className="bi bi-trash-fill"
+											onClick={() => clearItem(prod.id)}></td>
+									</tr>
+								))}
+							</tbody>
 						</table>
 						<br></br>
 						<h5>{`Totales de unidades del carrito: ${itemsCarrito()} -  Importe Total de la Compra ${Intl.NumberFormat(
