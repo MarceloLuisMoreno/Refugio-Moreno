@@ -14,17 +14,18 @@ const CartContextProvider = ({children}) => {
  		const cartListBak = [...cartList];
 		if (cartListBak.find((prod) => prod.id === items.item.id) !== undefined) {
 			//Sumo la cantidad en el item que ya está en el carrito
-			cartListBak.find((prod) => prod.id === items.item.id).cantidad += items.cantidad;
+			cartListBak.find((prod) => prod.id === items.item.id).quantity += items.quantity;
 			setCartList(cartListBak);
 		} else {
 			//Incorporo el nuevo item al carrito junto a la cantidad
-			setCartList([...cartList, {...items.item, cantidad: items.cantidad}]);
+			
+			setCartList([...cartList, {...items.item, quantity: items.quantity}]);
 		}
 	}
 
 	// 	Función para sumar la cantidades de items que tiene el carrito
 	const itemsCarrito = () => {
-		return cartList.reduce((prev, next) => prev + next.cantidad, 0);
+		return cartList.reduce((prev, next) => prev + next.quantity, 0);
 	};
 
 	// Funcion para poner a cero el carrito
@@ -39,7 +40,7 @@ const CartContextProvider = ({children}) => {
 
 	//Funcion para totalizar el Carrito
 	const totalCart = () => {
-		return cartList.reduce((total, item) => total + (item.cantidad * item.precio) ,0)
+		return cartList.reduce((total, item) => total + (item.quantity * item.price) ,0)
 		};
 
 	return (

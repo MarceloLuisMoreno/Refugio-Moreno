@@ -1,7 +1,7 @@
-import {Container} from "react-bootstrap";
+import {Container, Button, Spinner} from "react-bootstrap";
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
-import {getFetch} from "../../services/getFetch";
+import {getFirestore} from "../../services/getFirestore";
 import ItemList from "./../ItemList";
 
 function ItemListContainer() {
@@ -10,7 +10,7 @@ function ItemListContainer() {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if (categoryId === "todos") {
+		/* 		if (categoryId === "todos") {
 			getFetch
 				.then((res) => {
 					setItems(res);
@@ -26,6 +26,28 @@ function ItemListContainer() {
 				.finally(() => setLoading(false));
 		}
 	}, [categoryId]);
+ */
+
+		if (categoryId === "todos") {
+			const db = getFirestore();
+			const dbQuery = db.collection("items").orderBy("category", "asc").get();
+			dbQuery
+				.then((resp) =>
+					setItems(resp.docs.map((items) => ({id: items.id, ...items.data()})))
+				)
+				.catch((err) => alert(`Error: ${err}`))
+				.finally(() => setLoading(false));
+		} else {
+			const db = getFirestore();
+			const dbQuery = db.collection("items").where("category", "==", categoryId).get();
+			dbQuery
+				.then((resp) =>
+					setItems(resp.docs.map((items) => ({id: items.id, ...items.data()})))
+				)
+				.catch((err) => alert(`Error: ${err}`))
+				.finally(() => setLoading(false));
+		}
+	}, [categoryId]);
 
 	return (
 		<Container>
@@ -33,9 +55,16 @@ function ItemListContainer() {
 			<br />
 			<h2 className="mt-5">Nuestros productos - {categoryId.toUpperCase()}</h2>
 			{loading ? (
-				<div className="spinner-border text-success" role="status">
-					<span className="visually-hidden">Loading...</span>
-				</div>
+				<Button className="m-5" variant="success" disabled>
+					<Spinner
+						as="span"
+						animation="border"
+						role="status"
+						aria-hidden="true"
+						size="lg"
+					/>
+					L O A D I N G ...
+				</Button>
 			) : (
 				<div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 row-cols-xxl-4 mb-5 text-center">
 					<ItemList items={items} />

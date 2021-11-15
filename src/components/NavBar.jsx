@@ -19,9 +19,9 @@ function NavBar() {
 				<Nav className="me-auto">
 					<Link className="nav-link" to="/">Home</Link>
 					<Link className="nav-link"  to="/category/todos">Productos</Link>
-					<Link className="nav-link"  to="/category/plantas">Plantas</Link>
 					<Link className="nav-link"  to="/category/cuadros">Cuadros</Link>
 					<Link className="nav-link"  to="/category/macetas">Macetas</Link>
+					<Link className="nav-link"  to="/category/plantas">Plantas</Link>
 					<Link className="nav-link"  to="/category/vinilos">Vinilos</Link>
 				</Nav>
 			</Navbar.Collapse>

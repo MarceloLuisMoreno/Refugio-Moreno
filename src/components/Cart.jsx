@@ -24,9 +24,10 @@ function Cart() {
 			) : (
 				<div>
 					<Container>
+					< >
 						<br />
 						<h1 className="mt-2 p-4">Carrito de compras</h1>
-						<table className="table table-bordered table-success text-center">
+						<table className="table table-bordered table-primary text-center" >
 								<thead>
 									<tr className="fs-5 fw-bold">
 										<th>Id.</th>
@@ -41,19 +42,19 @@ function Cart() {
 								{cartList.map((prod) => (
 									<tr key={prod.id}>
 										<td>{prod.id}</td>
-										<td>{prod.cantidad}</td>
-										<td>{prod.nombre}</td>
+										<td>{prod.quantity}</td>
+										<td>{prod.name}</td>
 										<td>
 											{Intl.NumberFormat("es-AR", {
 												currency: "ARS",
 												style: "currency",
-											}).format(prod.precio)}
+											}).format(prod.price)}
 										</td>
 										<td>
 											{Intl.NumberFormat("es-AR", {
 												currency: "ARS",
 												style: "currency",
-											}).format(prod.cantidad * prod.precio)}
+											}).format(prod.quantity * prod.price)}
 										</td>
 										<td
 											className="bi bi-trash-fill"
@@ -72,6 +73,12 @@ function Cart() {
 						).format(totalCart())}`}</h5>
 
 						<br />
+						<h6>Medios de Pago:</h6>
+						<img
+							src={"/assets/mediosPago/mediosPago.png"}
+							alt="distintos medios de pago"
+							className="w-50 m-3"
+						/>
 						<br />
 						<Button as={Link} to="/category/todos" variant="success" className="mx-2">
 							Seguir comprando
@@ -88,6 +95,7 @@ function Cart() {
 							Vaciar carrito
 						</Button>
 						<br />
+						</>
 					</Container>
 				</div>
 			)}
