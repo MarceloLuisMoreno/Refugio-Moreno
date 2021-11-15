@@ -8,19 +8,18 @@ function Cart() {
 	return (
 		<>
 			{itemsCarrito() === 0 ? (
-				<div>
+				<Container>
 					<br />
+					<h1 className="mt-5" >El carrito está vacío...</h1>
 					<br />
-					<br />
-					<br />
-					<br />
-					<h1>EL CARRITO ESTA VACIO</h1>
-					<br />
+					<video loop autoPlay>
+                        <source src="/assets/videos/carritoVacio.mp4" type="video/mp4" alt="Marketing illustrations by Storyset" ></source>
+                    </video>
 					<br />
 					<Button as={Link} to="/category/todos" variant="success" className="mx-2">
 						Hacé tu COMPRA!!!
 					</Button>
-				</div>
+				</Container>
 			) : (
 				<div>
 					<Container>
