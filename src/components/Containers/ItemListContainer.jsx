@@ -29,8 +29,8 @@ function ItemListContainer() {
  */
 
 		if (categoryId === "todos") {
-			const db = getFirestore();
-			const dbQuery = db.collection("items").orderBy("category", "asc").get();
+			const db = getFirestore()
+			const dbQuery = db.collection("items").orderBy("category", "asc").orderBy("name").get()
 			dbQuery
 				.then((resp) =>
 					setItems(resp.docs.map((items) => ({id: items.id, ...items.data()})))
@@ -39,12 +39,20 @@ function ItemListContainer() {
 				.finally(() => setLoading(false));
 		} else {
 			const db = getFirestore();
-			const dbQuery = db.collection("items").where("category", "==", categoryId).get();
+			//			const dbQuery = db.collection("categories").get();  
+			const dbQuery = db
+				.collection("items")
+				.where("category", "==", categoryId)
+				.orderBy("name")
+				.get();
+
 			dbQuery
 				.then((resp) =>
-					setItems(resp.docs.map((items) => ({id: items.id, ...items.data()})))
+					setItems(
+						resp.docs.map((items) => ({id: items.id, ...items.data()}))
+					)
 				)
-				.catch((err) => alert(`Error: ${err}`))
+				.catch((err) => console.log(`Error: ${err}`))
 				.finally(() => setLoading(false));
 		}
 	}, [categoryId]);

@@ -3,6 +3,7 @@ import {Container, Row, Col, Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {useCartContext} from "../context/CartContext";
+import Fade from 'react-reveal/Fade';
 
 function ItemDetail({item}) {
 	const {addItem} = useCartContext();
@@ -15,6 +16,7 @@ function ItemDetail({item}) {
 
 	return (
 		<Container className="p-2">
+			<Fade left>
 			<br />
 			<Row className="gx-5  shadow p-3 mb-5 bg-white rounded">
 				<Col>
@@ -60,6 +62,7 @@ function ItemDetail({item}) {
 					</div>
 				</Col>
 			</Row>
+			</Fade>
 		</Container>
 	);
 }

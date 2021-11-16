@@ -4,7 +4,7 @@ import Zoom from "react-reveal";
 function HomeContainer({ greeting }) {
 	return (
 		<Container>
-			<h2 className="text-center pt-5 mt-5">{greeting}</h2>
+			<h2 className="text-center mt-5 pt-4">{greeting}</h2>
 			<Zoom>
 				<img
 					src="assets/img/productos.png"

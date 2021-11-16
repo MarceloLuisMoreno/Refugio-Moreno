@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Button} from "react-bootstrap";
+import Swing from 'react-reveal/Swing';
 
 function ItemCount({stock, initial, onAdd}) {
 	const [count, setCount] = useState(initial);
@@ -12,7 +13,9 @@ function ItemCount({stock, initial, onAdd}) {
 				size="lg"
 				className="bi bi-dash-circle-fill"
 				disabled={count === 1}></Button>
-			<label className="fs-3 mx-4">{count}</label>
+			<Swing spy={count}>
+				<label className="fs-3 mx-4 text-success">{count}</label>
+			</Swing>
 			<Button
 				onClick={() => setCount(count + 1)}
 				variant="light"
@@ -26,7 +29,7 @@ function ItemCount({stock, initial, onAdd}) {
 					onClick={() => {
 						onAdd(count);
 					}}>
-					 Agregar al Carrito 
+					Agregar al Carrito
 				</Button>
 			</div>
 		</div>
