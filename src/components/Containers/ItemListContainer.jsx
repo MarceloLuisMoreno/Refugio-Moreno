@@ -1,11 +1,11 @@
-import {Container, Button, Spinner} from "react-bootstrap";
-import {useState, useEffect} from "react";
-import {useParams} from "react-router-dom";
-import {getFirestore} from "../../services/getFirestore";
+import { Container, Button, Spinner } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getFirestore } from "../../services/getFirestore";
 import ItemList from "./../ItemList";
 
 function ItemListContainer() {
-	const {categoryId} = useParams();
+	const { categoryId } = useParams();
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -33,7 +33,7 @@ function ItemListContainer() {
 			const dbQuery = db.collection("items").orderBy("category", "asc").orderBy("name").get()
 			dbQuery
 				.then((resp) =>
-					setItems(resp.docs.map((items) => ({id: items.id, ...items.data()})))
+					setItems(resp.docs.map((items) => ({ id: items.id, ...items.data() })))
 				)
 				.catch((err) => alert(`Error: ${err}`))
 				.finally(() => setLoading(false));
@@ -49,10 +49,10 @@ function ItemListContainer() {
 			dbQuery
 				.then((resp) =>
 					setItems(
-						resp.docs.map((items) => ({id: items.id, ...items.data()}))
+						resp.docs.map((items) => ({ id: items.id, ...items.data() }))
 					)
 				)
-				.catch((err) => console.log(`Error: ${err}`))
+				.catch((err) => alert(`Upss!! Error: ${err}`))
 				.finally(() => setLoading(false));
 		}
 	}, [categoryId]);

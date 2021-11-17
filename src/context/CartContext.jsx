@@ -29,7 +29,7 @@ const CartContextProvider = ({children}) => {
 	};
 
 	// Funcion para poner a cero el carrito
-	const clear = () => {
+	const clearCart = () => {
 		setCartList([]);
 	};
 
@@ -49,7 +49,7 @@ const CartContextProvider = ({children}) => {
 				cartList,
 				addItem,
 				itemsCarrito,
-				clear,
+				clearCart,
 				totalCart,
 				clearItem
 			}}>

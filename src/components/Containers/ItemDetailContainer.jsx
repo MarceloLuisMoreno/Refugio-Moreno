@@ -23,7 +23,7 @@ function ItemDetailContainer() {
 		const dbQuery = db.collection("items").doc(itemId).get();
 		dbQuery
 			.then((resp) => setItems({id: resp.id, ...resp.data()}))
-			.catch((err) => alert(`Error: ${err}`))
+			.catch((err) => alert(`Upsss!!! Error: ${err}`))
 			.finally(() => setLoading(false));
 	}, [itemId]);
 

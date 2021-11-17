@@ -1,21 +1,17 @@
-import { useCartContext } from "../context/CartContext";
-import { Button, Container, Modal, Form, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { Flip } from "react-reveal";
-import { getFirestore } from "./../services/getFirestore";
-import { useState } from "react";
+import {useCartContext} from "../context/CartContext";
+import {Button, Container, Modal, Form, Col, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {Flip} from "react-reveal";
+import {getFirestore} from "./../services/getFirestore";
+import {useState} from "react";
 import firebase from "firebase";
 import "firebase/firestore";
 
 function Cart() {
-	const { cartList, itemsCarrito, totalCart, clear, clearItem } = useCartContext();
+	const {cartList, itemsCarrito, totalCart, clearCart, clearItem} = useCartContext();
 	const [show, setShow] = useState(false);
-	const [ordenId, setOrdenId] = useState('');
+	const [ordenId, setOrdenId] = useState("");
 
-	// Función para ver el Modal del Formulario
-	const modalClose = () => setShow(false);
-	// Función para cerrar el Modal del Formulario
-	const modalShow = () => setShow(true);
 
 	// formData para los datos del formulario, los seteo en blanco
 	const [formData, setFormData] = useState({
@@ -24,8 +20,15 @@ function Cart() {
 		email: "",
 	});
 
-	const generarOrden = (e) => {
-		e.preventDefault();
+	// Para tomar los datos del formulario
+	function handleChange(e) {
+		setFormData({
+			...formData,
+			[e.target.name]: e.target.value,
+		});
+	}
+
+	const generarOrden = () => {
 
 		let orden = {};
 		orden.date = firebase.firestore.Timestamp.fromDate(new Date());
@@ -36,33 +39,65 @@ function Cart() {
 			const name = prod.name;
 			const quantity = prod.quantity;
 			const price = prod.price;
-			return { id, name, quantity, price };
+			return {id, name, quantity, price};
 		});
-		console.log(orden);
-		setOrdenId('')
+		setOrdenId("");
 		const dbQuery = getFirestore();
 		dbQuery
 			.collection("orders")
 			.add(orden)
-			.then((resp) => alert(`La Orden se generó correctamente con el número ${resp.id}`))
-			.catch((err) => console.log(err))
-			.finally(() =>
-				setFormData({
-					name: "",
-					phone: "",
-					email: "",
-				})
+			.then((resp) => setOrdenId(resp.id))
+			.catch((err) => alert(`Upss!! Error: ${err}`))
+			.finally(
+				() =>
+					setFormData({
+						name: "",
+						phone: "",
+						email: "",
+					}),
 			);
 
-		clear()
+			//Actualiza todos los items que estan en el listado de Cart del CartContext
+    
+        const itemsToUpdate = dbQuery.collection('items').where(
+            firebase.firestore.FieldPath.documentId(), 'in', cartList.map(i=> i.id)
+        )
+    
+        const batch = dbQuery.batch();
+        
+        // por cada item restar del stock la cantidad de el carrito
+    
+        itemsToUpdate.get()
+        .then( collection=>{
+            collection.docs.forEach(docSnapshot => {
+                batch.update(docSnapshot.ref, {
+                    stock: docSnapshot.data().stock - cartList.find(item => item.id === docSnapshot.id).quantity
+                })
+            })
+    
+            batch.commit().then(res =>{
+                console.log('resultado batch:', res)
+            })
+        })
 	};
 
-	function handleChange(e) {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value,
-		});
+	// Submit del Formulario
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		generarOrden()
 	}
+
+	// Para cerrar el Formulario una vez generada la orden
+	function handleClose() {
+		setShow(false);
+		clearCart()
+	}
+
+
+	// Función para ver el Modal del Formulario
+	const modalClose = () => setShow(false);
+	// Función para cerrar el Modal del Formulario
+	const modalShow = () => setShow(true);
 
 	return (
 		<>
@@ -155,7 +190,7 @@ function Cart() {
 						</Button>
 						<Button
 							onClick={() => {
-								clear();
+								clearCart();
 							}}
 							variant="success"
 							className="mx-3 mt-2">
@@ -165,13 +200,15 @@ function Cart() {
 
 						<Modal show={show} onHide={modalClose}>
 							<Modal.Header closeButton className="bg-success">
-								<Modal.Title>Formulario de Compra</Modal.Title>
+								<Modal.Title className="text-white">
+									Formulario de Compra
+								</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
-								<form onSubmit={generarOrden} onChange={handleChange}>
+								<form onSubmit={handleSubmit} onChange={handleChange}>
 									<Form.Group
 										as={Row}
-										className="mb-4"
+										className="mb-3"
 										controlId="validationCustomUsername">
 										<Form.Label column sm={3}>
 											Nombre
@@ -186,12 +223,12 @@ function Cart() {
 									</Form.Group>
 									<Form.Group
 										as={Row}
-										className="mb-4"
+										className="mb-3"
 										controlId="formHorizontalPassword">
 										<Form.Label column sm={3}>
 											Telefono
 										</Form.Label>
-										<Col sm={10}>
+										<Col sm={11}>
 											<Form.Control
 												placeholder="Telefono"
 												name="phone"
@@ -202,12 +239,12 @@ function Cart() {
 
 									<Form.Group
 										as={Row}
-										className="mb-4"
+										className="mb-3"
 										controlId="formHorizontalEmail">
 										<Form.Label column sm={3}>
 											Email
 										</Form.Label>
-										<Col sm={10}>
+										<Col sm={11}>
 											<Form.Control
 												placeholder="@email"
 												name="email"
@@ -219,12 +256,28 @@ function Cart() {
 									<Form.Group as={Row} className="mb-4 align-items-center">
 										<Col sm={10}>
 											<Button type="submit" variant="success">
-												Enviar
+												Generar Orden
 											</Button>
 										</Col>
 									</Form.Group>
 								</form>
 							</Modal.Body>
+
+							<Modal.Footer>
+								{ordenId !== "" && (
+									<>
+										<Flip left opposite cascade>
+											<Modal.Body className="bg-danger text-center text-white fw-normal">
+												{`Muchas GRACIAS por su Compra!!! Tome nota del Número de
+											Orden: ${ordenId}`}
+											</Modal.Body>
+										</Flip>
+										<Button variant="secondary" onClick={handleClose}>
+											Close
+										</Button>
+									</>
+								)}
+							</Modal.Footer>
 						</Modal>
 					</Container>
 				</div>
