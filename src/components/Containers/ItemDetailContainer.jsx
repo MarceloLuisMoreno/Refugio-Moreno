@@ -25,6 +25,9 @@ function ItemDetailContainer() {
 			.then((resp) => setItems({id: resp.id, ...resp.data()}))
 			.catch((err) => alert(`Upsss!!! Error: ${err}`))
 			.finally(() => setLoading(false));
+
+			//  comando para eliminar el warning
+
 	}, [itemId]);
 
 	return (
