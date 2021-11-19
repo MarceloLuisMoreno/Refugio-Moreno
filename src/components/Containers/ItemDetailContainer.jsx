@@ -11,23 +11,14 @@ function ItemDetailContainer() {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		/* 		getItem
-			.then((res) => {
-				setItems(res.find((item) => item.id === parseInt(itemId)));
-			})
-			.catch((err) => alert(`Error: ${err}`))
-			.finally(() => setLoading(false));
- */
-
 		const db = getFirestore();
 		const dbQuery = db.collection("items").doc(itemId).get();
 		dbQuery
 			.then((resp) => setItems({id: resp.id, ...resp.data()}))
-			.catch((err) => alert(`Upsss!!! Error: ${err}`))
+			.catch((err) => alert(`UPSSS Error: ${err}`))
 			.finally(() => setLoading(false));
-
 			//  comando para eliminar el warning
-
+			//eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [itemId]);
 
 	return (

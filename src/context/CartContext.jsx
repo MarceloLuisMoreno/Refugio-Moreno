@@ -18,7 +18,6 @@ const CartContextProvider = ({children}) => {
 			setCartList(cartListBak);
 		} else {
 			//Incorporo el nuevo item al carrito junto a la cantidad
-			
 			setCartList([...cartList, {...items.item, quantity: items.quantity}]);
 		}
 	}

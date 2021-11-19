@@ -8,7 +8,7 @@ function Item({ item }) {
 			<Zoom>
 			<Card style={{ width: "16rem" }} className="mt-5 shadow p-3 mb-5 bg-white rounded">
 				<Link to={`/item/${item.id}`}>
-					<Card.Img variant="top" src={item.image} />
+					<Card.Img variant="top" src={item.image} alt="Productos de Refugio Tienda Deco" loading="lazy" />
 				</Link>
 				<Card.Body>
 

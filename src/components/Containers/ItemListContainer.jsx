@@ -10,46 +10,15 @@ function ItemListContainer() {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		/* 		if (categoryId === "todos") {
-			getFetch
-				.then((res) => {
-					setItems(res);
-				})
-				.catch((err) => alert(`Error: ${err}`))
-				.finally(() => setLoading(false));
-		} else {
-			getFetch
-				.then((res) => {
-					setItems(res.filter((items) => items.tipo === categoryId));
-				})
-				.catch((err) => alert(`Error: ${err}`))
-				.finally(() => setLoading(false));
-		}
-	}, [categoryId]);
- */
 		const db = getFirestore();
-		if (categoryId === "todos") {
-			const dbQuery = db.collection("items").orderBy("category", "asc").orderBy("name").get();
-			dbQuery
-				.then((resp) =>
-					setItems(resp.docs.map((items) => ({id: items.id, ...items.data()})))
-				)
-				.catch((err) => alert(`Upsss!!! Error: ${err}`))
-				.finally(() => setLoading(false));
-		} else {
-			const dbQuery = db
-				.collection("items")
-				.where("category", "==", categoryId)
-				.orderBy("name")
-				.get();
-
-			dbQuery
-				.then((resp) =>
-					setItems(resp.docs.map((items) => ({id: items.id, ...items.data()})))
-				)
-				.catch((err) => alert(`Upss!! Error: ${err}`))
-				.finally(() => setLoading(false));
-		}
+		const dbQuery =
+			categoryId === "todos"
+				? db.collection("items").orderBy("category", "asc").orderBy("name")
+				: db.collection("items").where("category", "==", categoryId).orderBy("name");
+		dbQuery.get()
+			.then((resp) => setItems(resp.docs.map((items) => ({id: items.id, ...items.data()}))))
+			.catch((err) => alert(`UPSSS Error: ${err}`))
+			.finally(() => setLoading(false));
 	}, [categoryId]);
 
 	return (

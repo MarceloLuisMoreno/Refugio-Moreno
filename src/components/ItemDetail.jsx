@@ -23,6 +23,7 @@ function ItemDetail({item}) {
 					<img
 						src={item.image}
 						className="containerImagenItem"
+						loading="lazy"
 						alt="Producto de Refugio Tienda Deco productos"
 					/>
 				</Col>

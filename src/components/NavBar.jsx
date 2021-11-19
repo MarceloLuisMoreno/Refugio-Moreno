@@ -11,6 +11,7 @@ function NavBar() {
 				<img
 					src="/refugio.png"
 					className="nav-link d-inline-block align-top mx-5 ps-5"
+					loading="lazy"
 					alt="Refugio Tienda Deco logo"
 				/>
 			</Link>
