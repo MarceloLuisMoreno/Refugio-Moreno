@@ -1,18 +1,16 @@
 // Component Carrito
-import {useCartContext} from "../context/CartContext";
-import Spin from "react-reveal/Spin";
+import { useCartContext } from "../context/CartContext"
+import { Fade } from "react-awesome-reveal"
 
 function CardWidget() {
-	const {itemsCarrito} = useCartContext();
+	const { itemsCart } = useCartContext()
 	return (
-		<>
-			<Spin spy={itemsCarrito()}>
-				<p className="bi bi-cart4 fs-4 text-secondary text-decoration-none">
-					{` ` + itemsCarrito()}
-				</p>
-			</Spin>
-		</>
-	);
+		<div>
+			<Fade>
+				<p className="bi bi-cart4 fs-4 text-secondary text-decoration-none">{` ` + itemsCart()}</p>
+			</Fade>
+		</div>
+	)
 }
 
-export default CardWidget;
+export default CardWidget

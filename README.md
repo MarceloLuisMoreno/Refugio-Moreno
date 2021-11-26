@@ -1,28 +1,41 @@
 ![Refugio Tienda Deco](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/refugio.png?raw=true)
 # REFUGIO Tienda Deco 
 ## _Proyecto e-commerce de una tienda de objetos de decoración._
+> Proyecto final E-commerce, Curso React-Js de [CoderHouse](https://www.coderhouse.com/). Año 2021 
+
 ## Contenido
-- Este proyecto (en desarrollo) tiene una única rama, main.
+- Este proyecto (actuanmente en desarrollo) tiene una única rama, main.
+- Incompleto para comercializar.
 
-## Objetivos
+## Objetivos y Características
 
-> El objetivo del proyecto es crear una Tienda  E-commerce  (un sistema de venta de productos
->y gestiona los pagos a través de medios electrónicos.), en una single-page application (SPA), o
->aplicación de página única e-commerce, donde se pueda navegar sobre los distintos productos
->en ventas y también sobre sus categorías, luego agregarlos al carrito, modificar los elementos
->del carrito, para luego finalizar la compra de los elementos cargados al mismo.
+> El objetivo del proyecto es crear una Tienda  E-commerce  (un sistema de venta de productos con gestión de 
+> su base de datos a través de Firebase), en una single-page application (SPA), o aplicación de página única. 
+>Donde se puede navegar por los distintos productos (también sobre sus categorías)
+>e ir a sus detalles. Desde el detalle se puede ver la descripción, foto y precio del producto y permite 
+>agregarlos al carrito. También se pueden ver y modificar los elementos del carrito, para luego finalizar la compra de
+>los elementos cargados al mismo a través del llenado de un formulario de compra. Y finaliza guardando la orden
+>de compra (con todos sus productos más la fecha de compra) en una base de datos del proyecto, alojada en Firebase.
 
-Actualmente se encuentra en etapa de desarrollo.
 
 ## Tenología
 
 Este proyecto se está desarrolando en React-Js:
 
 - [React-Js](https://create-react-app.dev/) - La App fue creada con Create React App
+- Utiliza una serea de librerías externas (detalladas en Complementos).
 
 ## Instalación
 
-Refugio Tienda Deco requiere [React-Js](https://create-react-app.dev/) para ejecutarse.
+Refugio Tienda Deco requiere [Node.js](https://nodejs.org/en/) para ejecutarse.
+
+Instale las dependencias y devDependencies e inicie el servidor.
+
+```sh
+$ cd coderhouse-ecommerce
+$ npm install
+
+```
 
 Para clonar este repositorio debe seguir las siguientes instrucciones:
 
@@ -46,10 +59,18 @@ Una vez clonado el repositorio, para que el proyecto se ejecute correctamente, s
 npm install react-router-dom
 ```
 
-`•	react-bootstrap `  : Es un framework front-end con el que le damos los diferentes estilos a la SPA.
+`•	Firebase`  : Libreria de servicios de Google, que nos facilita y permite desarrollar el front-end, sin preocuparnos del back-end. Permite satisfacer las distintas necesidades de esta aplicación y su ciclo de desarrollo, dentro de las cuales encontramos: Seguridad y autenticación, Almacenamiento y consulta, Hosting, Monitoreo, Functions y más.
+
+`•	react-bootstrap 5.1.1`  : Es un framework front-end con el que le damos los diferentes estilos a la SPA.
 
 ```sh
 npm install react-bootstrap@next bootstrap@5.1.1
+```
+
+`•	react-awesome-reveal`  : Biblioteca de React que nos permite la animación de los componentes del proyecto, de manera fácil y eficiente. Para agregarlo, ejecute el siguiente comando desde la raíz del proyecto.
+
+```sh
+npm install --save react-awesome-reveal
 ```
 
 ## Ejecución
@@ -61,7 +82,7 @@ npm start
 ```
 >Esto hará que la aplicación se ejecute en modo de desarrollo.
 >Abra http: // localhost: 3000 para verlo en el navegador.
->La página se recargará si realiza modificaciones. También verá errores en la consola.
+
 
 ## Estado del Proyecto
 
@@ -69,10 +90,11 @@ Actualmente cuenta con los siguientes Componentes:
 - `NavBar` : barra de navegación de la SPA.
 - `HomeContainer` : componente de bienvenida.
 - `ItemListContainer` : En donde mostramos el catálogo, en conjunción con los compomentes `ItemList` e `Item`.
-- `ItemDetailContainer` : Para mostrar la información del item seleccionado `ItemDetail`, en  dónde ingresaremos la cantidad y nos permite la opción de agregar al carrito.
+- `ItemDetailContainer` : Para mostrar la información del item seleccionado `ItemDetail`, en  dónde ingresaremos la cantidad y nos permite la opción de agregar al carrito `ItemCount`.
 - `CardWidget` : componente para mostrar en la barra de navación la cantidad de productos seleccionados (en desarrollo).
-- `getFecth` : componente que nos devuelve un arreglo de objetos, que contiene el catálogo de productos.
-- `getItem` : nos devuelve un arreglo de objetos, con el detalle expandido de los productos.
+- `getFirestone` : componente que nos vincula y permite la configuración de la base de datos que usa el Proyecto en Firebase.
+- `Cart` : nos devuelve el listado de los productos agregados al carrito `CartList` , indicando el total del mismo. Permite la elimación de productos y da la opción de Generar la orden de compra, a través del llenado del formulario de compra `CartForm`.
+- `CartContext` : que contiene todas las funcionalidades asociadas al carrito de compras.
 
 ## Demo del Proyecto
 - [REFUGIO Tienda Deco](https://xenodochial-varahamihira-6b59cf.netlify.app/)
@@ -89,6 +111,12 @@ Listado de Productos
 
 Item:
 ![item](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/item.png?raw=true)
+
+Carrito Compra:
+![carrito](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/carrito.png?raw=true)
+
+Formulario Compra:
+![formulario](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/formularioCompra.png?raw=true)
 
 ## Licencia
 

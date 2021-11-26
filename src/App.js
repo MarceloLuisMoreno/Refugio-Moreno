@@ -9,6 +9,7 @@ import "./styles/styles.css";
 import CartContextProvider from "./context/CartContext";
 
 function App() {
+
 	return (
 		<>
 			<div className="appHeader p-5">

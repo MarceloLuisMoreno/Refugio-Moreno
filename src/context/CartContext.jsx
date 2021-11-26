@@ -1,60 +1,63 @@
-import {createContext, useContext} from "react";
-import {useState} from "react";
+import { createContext, useContext } from "react"
+import { useState } from "react"
 
-const CartContext = createContext([]);
+const CartContext = createContext([])
 
-export const useCartContext = () => useContext(CartContext);
+export const useCartContext = () => useContext(CartContext)
 
-const CartContextProvider = ({children}) => {
+const CartContextProvider = ({ children }) => {
 	// carList arreglo que guarda los items agregados al carrito
-	const [cartList, setCartList] = useState([]);
+	const [cartList, setCartList] = useState([])
 
 	//	Función para adicionar el item a cartList si no está en el carrito
 	function addItem(items) {
- 		const cartListBak = [...cartList];
-		if (cartListBak.find((prod) => prod.id === items.item.id) !== undefined) {
-			//Sumo la cantidad en el item que ya está en el carrito
-			cartListBak.find((prod) => prod.id === items.item.id).quantity += items.quantity;
-			setCartList(cartListBak);
-		} else {
+		const cartListBak = [...cartList]
+		const idItem = cartListBak.findIndex((prod) => prod.id === items.item.id)
+		if (idItem === -1) {
 			//Incorporo el nuevo item al carrito junto a la cantidad
-			setCartList([...cartList, {...items.item, quantity: items.quantity}]);
+			setCartList([...cartList, { ...items.item, quantity: items.quantity }])
+		} else {
+			//Controlo si la nueva cantidad sumada a la que ya tenía, no supera la cantidad de stock, para sumar en el item que ya está en el carrito
+			cartListBak[idItem].quantity + items.quantity > cartListBak[idItem].stock
+				? (cartListBak[idItem].quantity = cartListBak[idItem].stock)
+				: (cartListBak[idItem].quantity += items.quantity)
+			setCartList(cartListBak)
 		}
 	}
 
 	// 	Función para sumar la cantidades de items que tiene el carrito
-	const itemsCarrito = () => {
-		return cartList.reduce((prev, next) => prev + next.quantity, 0);
-	};
+	const itemsCart = () => {
+		return cartList.reduce((prev, next) => prev + next.quantity, 0)
+	}
 
 	// Funcion para poner a cero el carrito
 	const clearCart = () => {
-		setCartList([]);
-	};
+		setCartList([])
+	}
 
 	// Funcion para eliminar un item del carrito
 	const clearItem = (id) => {
-		setCartList( cartList.filter(item => item.id !== id ));
-	};
+		setCartList(cartList.filter((item) => item.id !== id))
+	}
 
 	//Funcion para totalizar el Carrito
 	const totalCart = () => {
-		return cartList.reduce((total, item) => total + (item.quantity * item.price) ,0)
-		};
+		return cartList.reduce((total, item) => total + item.quantity * item.price, 0)
+	}
 
 	return (
 		<CartContext.Provider
 			value={{
 				cartList,
 				addItem,
-				itemsCarrito,
+				itemsCart,
 				clearCart,
 				totalCart,
-				clearItem
+				clearItem,
 			}}>
 			{children}
 		</CartContext.Provider>
-	);
-};
+	)
+}
 
-export default CartContextProvider;
+export default CartContextProvider

@@ -1,6 +1,6 @@
-import {Button, Form, Col, Row} from "react-bootstrap";
+import { Button, Form, Col, Row } from "react-bootstrap"
 
-function CartForm({formData, handleSubmit, handleChange}) {
+function CartForm({ formData, handleSubmit, handleChange }) {
 	return (
 		<form onSubmit={handleSubmit} onChange={handleChange}>
 			<Form.Group as={Row} className="mb-3">
@@ -8,12 +8,7 @@ function CartForm({formData, handleSubmit, handleChange}) {
 					Nombre
 				</Form.Label>
 				<Col sm={11}>
-					<Form.Control
-						placeholder="Nombre y Apellido"
-						name="name"
-						required
-						defaultValue={formData.name}
-					/>
+					<Form.Control placeholder="Nombre y Apellido" name="name" required defaultValue={formData.name} />
 				</Col>
 			</Form.Group>
 			<Form.Group as={Row} className="mb-3">
@@ -21,12 +16,7 @@ function CartForm({formData, handleSubmit, handleChange}) {
 					Telefono
 				</Form.Label>
 				<Col sm={11}>
-					<Form.Control
-						placeholder="Telefono"
-						name="phone"
-						defaultValue={formData.phone}
-						required
-					/>
+					<Form.Control placeholder="Telefono" name="phone" required defaultValue={formData.phone} />
 				</Col>
 			</Form.Group>
 			<Form.Group as={Row} className="mb-3">
@@ -34,12 +24,7 @@ function CartForm({formData, handleSubmit, handleChange}) {
 					email
 				</Form.Label>
 				<Col sm={11}>
-					<Form.Control
-						placeholder="@email"
-						name="email"
-						required
-						defaultValue={formData.email}
-					/>
+					<Form.Control placeholder="@email" name="email" required defaultValue={formData.email} />
 				</Col>
 			</Form.Group>
 			<Form.Group as={Row} className="mb-3">
@@ -47,12 +32,7 @@ function CartForm({formData, handleSubmit, handleChange}) {
 					Reingresar
 				</Form.Label>
 				<Col sm={11}>
-					<Form.Control
-						placeholder="@email2"
-						name="email2"
-						required
-						defaultValue={formData.email2}
-					/>
+					<Form.Control placeholder="repetir email" name="email2" required defaultValue={formData.email2} />
 				</Col>
 			</Form.Group>
 			{formData.email !== "" && formData.email === formData.email2 ? (
@@ -67,7 +47,7 @@ function CartForm({formData, handleSubmit, handleChange}) {
 				<></>
 			)}
 		</form>
-	);
+	)
 }
 
-export default CartForm;
+export default CartForm
