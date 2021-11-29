@@ -1,5 +1,5 @@
 // Component Carrito
-import { useCartContext } from "../context/CartContext"
+import { useCartContext } from "../../context/CartContext"
 import { Fade } from "react-awesome-reveal"
 
 function CardWidget() {

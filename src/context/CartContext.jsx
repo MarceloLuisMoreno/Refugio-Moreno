@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const CartContext = createContext([])
 
@@ -7,7 +7,14 @@ export const useCartContext = () => useContext(CartContext)
 
 const CartContextProvider = ({ children }) => {
 	// carList arreglo que guarda los items agregados al carrito
-	const [cartList, setCartList] = useState([])
+	// controlo si hay algo en el localstorage para inicializar carrito
+	const [cartList, setCartList] = useState(() => {
+		return localStorage.cartList !== null ? JSON.parse(localStorage.cartList) : []
+	})
+
+	useEffect(() => {
+		localStorage.setItem("cartList", JSON.stringify(cartList))
+	}, [cartList])
 
 	//	Función para adicionar el item a cartList si no está en el carrito
 	function addItem(items) {
