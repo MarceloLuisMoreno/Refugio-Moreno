@@ -112,7 +112,7 @@ Actualmente cuenta con los siguientes Componentes:
 - `ShowError` : modal para mostrar los errores surgidos durante la ejecución del proyecto.
 
 ## Demo del Proyecto
-- [REFUGIO Tienda Deco](https://xenodochial-varahamihira-6b59cf.netlify.app/)
+- [REFUGIO Tienda Deco](https://refugio-tiendadeco-marceloluismoreno.netlify.app/)
 
 ## Avance del Proyecto
 

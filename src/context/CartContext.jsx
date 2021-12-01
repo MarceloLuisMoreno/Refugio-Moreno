@@ -9,7 +9,7 @@ const CartContextProvider = ({ children }) => {
 	// carList arreglo que guarda los items agregados al carrito
 	// controlo si hay algo en el localstorage para inicializar carrito
 	const [cartList, setCartList] = useState(() => {
-		return localStorage.cartList !== null ? JSON.parse(localStorage.cartList) : []
+		return JSON.parse(localStorage.getItem(`cartList`)) || []
 	})
 
 	useEffect(() => {
