@@ -3,13 +3,12 @@ import firebase from "firebase/app"
 import { useState } from "react"
 import { Button, Container } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { useCartContext } from './../../context/CartContext';
-import { getFirestore } from './../../services/getFirestore';
+import { useCartContext } from "./../../context/CartContext"
+import { getFirestore } from "./../../services/getFirestore"
 import Cartlist from "./../CartList/CartList"
 import CartForm from "./../CartForm/CartForm"
-import ShowError from './../ShowError/ShowError';
-import EmptyCart from './../EmptyCart/EmptyCart';
-
+import ShowError from "./../ShowError/ShowError"
+import CartEmpty from "./../CartEmpty/CartEmpty"
 
 function Cart() {
 	const { cartList, totalCart, clearCart, itemsCart } = useCartContext()
@@ -17,7 +16,6 @@ function Cart() {
 	const [orderId, setOrderId] = useState("")
 	const [orderProcess, setOrderProcess] = useState(false)
 	const [messageErr, setmessageErr] = useState("")
-		// formData para los datos del formulario, los seteo en blanco
 	const [formData, setFormData] = useState({ name: "", phone: "", email: "", email2: "" })
 
 	// Para tomar los datos del formulario
@@ -88,44 +86,47 @@ function Cart() {
 
 	return (
 		<>
-			
 			{itemsCart() === 0 ? (
-					<EmptyCart />
-				) : (
+				<CartEmpty />
+			) : (
 				<Container className="text-center">
-				{/* Funcion CartList para listar el contenido del carrito  */}
-				<Cartlist />
-				<Button as={Link} to="/" variant="success" className="mx-3">
-					Seguir comprando
-				</Button>
-				<Button	onClick={() => { setShowForm(true) }} variant="success" className="mx-3">
+					{/* Funcion CartList para listar el contenido del carrito  */}
+					<Cartlist />
+					<Button as={Link} to="/" variant="success" className="mx-3">
+						Seguir comprando
+					</Button>
+					<Button onClick={() => { setShowForm(true) }}
+						variant="success"
+						className="mx-3">
 						Finalizar compra
-				</Button>
-				<Button onClick={() => { clearCart() }} variant="success" className="mx-3">
-					Vaciar carrito
-				</Button>
-				<br />
-				<h6 className="mt-3">Medios de Pago:</h6>
-				<img src={"/assets/mediosPago/mediosPago.png"} alt="distintos medios de pago" className="w-50" loading="lazy" />
-				{/* Funcion CartForm para llenar formulario compra y generar orden  */}
-				<CartForm
-					showForm={showForm}
-					formData={formData}
-					handleSubmit={handleSubmit}
-					handleChange={handleChange}
-					handleClose={handleClose}
-					orderId={orderId}
-					orderProcess={orderProcess}
-				/>
-				<div>
-					{messageErr !== "" && (
-						<>
-							<ShowError message={messageErr} handleMessageErr={handleMessageErr} />
-						</>
-					)}
-				</div></Container>
-				)}
-			
+					</Button>
+					<Button onClick={() => { clearCart() }}
+						variant="success"
+						className="mx-3">
+						Vaciar carrito
+					</Button>
+					<br />
+					<h6 className="mt-3">Medios de Pago:</h6>
+					<img src={"/assets/mediosPago/mediosPago.png"} alt="distintos medios de pago" className="w-50" loading="lazy" />
+					{/* Funcion CartForm para llenar formulario compra y generar orden  */}
+					<CartForm
+						showForm={showForm}
+						formData={formData}
+						handleSubmit={handleSubmit}
+						handleChange={handleChange}
+						handleClose={handleClose}
+						orderId={orderId}
+						orderProcess={orderProcess}
+					/>
+					<div>
+						{messageErr !== "" && (
+							<>
+								<ShowError message={messageErr} handleMessageErr={handleMessageErr} />
+							</>
+						)}
+					</div>
+				</Container>
+			)}
 		</>
 	)
 }

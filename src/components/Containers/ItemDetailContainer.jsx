@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 import { getFirestore } from "./../../services/getFirestore"
 import { Button, Spinner } from "react-bootstrap"
 import { Container } from "react-bootstrap"
-import ItemDetail from './../ItemDetail/ItemDetail';
-import ShowError from './../ShowError/ShowError';
+import ItemDetail from "./../ItemDetail/ItemDetail"
+import ShowError from "./../ShowError/ShowError"
 
 function ItemDetailContainer() {
 	const { itemId } = useParams()
@@ -25,7 +25,7 @@ function ItemDetailContainer() {
 
 	// Para resetear el Mensaje de error
 	const handleMessageErr = () => setmessageErr("")
-	
+
 	return (
 		<>
 			<br />
@@ -40,12 +40,12 @@ function ItemDetailContainer() {
 				<ItemDetail item={items} />
 			)}
 			<div>
-					{messageErr !== "" && (
-						<>
-							<ShowError message={messageErr} handleMessageErr={handleMessageErr} />
-						</>
-					)}
-				</div>
+				{messageErr !== "" && (
+					<>
+						<ShowError message={messageErr} handleMessageErr={handleMessageErr} />
+					</>
+				)}
+			</div>
 		</>
 	)
 }

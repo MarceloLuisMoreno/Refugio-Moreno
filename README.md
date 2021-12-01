@@ -64,7 +64,18 @@ npm install react-router-dom
 `•	react-bootstrap 5.1.1`  : Es un framework front-end con el que le damos los diferentes estilos a la SPA.
 
 ```sh
-npm install react-bootstrap@next bootstrap@5.1.1
+npm install react-bootstrap@next bootstrap@5.1.3
+```
+`•	bootstrap 5.0`  : Kit de herramientas de código abierto de front-end, con el cual se le da estilo al proyecto. El mismo está inyectado a través de un link agregado a index.html
+
+```sh
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+```
+
+`•	bootstrap icons`  : Biblioteca de íconos de código abierto, de alta calidad y gratuitos. Inyectados al proyecto a través de un Link.
+
+```sh
+<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"	/>
 ```
 
 `•	react-awesome-reveal`  : Biblioteca de React que nos permite la animación de los componentes del proyecto, de manera fácil y eficiente. Para agregarlo, ejecute el siguiente comando desde la raíz del proyecto.
@@ -87,14 +98,18 @@ npm start
 ## Estado del Proyecto
 
 Actualmente cuenta con los siguientes Componentes: 
-- `NavBar` : barra de navegación de la SPA.
 - `HomeContainer` : componente de bienvenida.
+- `UsContainer` : componente donde se detalle que es Refugio Tienda Deco.
+- `GalleryContainer` : componente con una galería de imágenes.
+- `ContactContainer` : componente con información de contacto de Refugio.
+- `NavBar` : barra de navegación de la SPA.
 - `ItemListContainer` : En donde mostramos el catálogo, en conjunción con los compomentes `ItemList` e `Item`.
 - `ItemDetailContainer` : Para mostrar la información del item seleccionado `ItemDetail`, en  dónde ingresaremos la cantidad y nos permite la opción de agregar al carrito `ItemCount`.
 - `CardWidget` : componente para mostrar en la barra de navación la cantidad de productos seleccionados (en desarrollo).
 - `getFirestone` : componente que nos vincula y permite la configuración de la base de datos que usa el Proyecto en Firebase.
-- `Cart` : nos devuelve el listado de los productos agregados al carrito `CartList` , indicando el total del mismo. Permite la elimación de productos y da la opción de Generar la orden de compra, a través del llenado del formulario de compra `CartForm`.
+- `Cart` : nos devuelve el listado de los productos agregados al carrito `CartList` , indicando el total del mismo. Si el carrito está vacío el componente `CartEmpty` no solicita ir a comprar. El comopente `CartList` permite la elimación de productos y da la opción de Generar la orden de compra, a través del llenado del formulario de compra `CartForm`.
 - `CartContext` : que contiene todas las funcionalidades asociadas al carrito de compras.
+- `ShowError` : modal para mostrar los errores surgidos durante la ejecución del proyecto.
 
 ## Demo del Proyecto
 - [REFUGIO Tienda Deco](https://xenodochial-varahamihira-6b59cf.netlify.app/)
@@ -106,8 +121,14 @@ Vista del proyecto en ejecución:
 Home
 ![home](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/home.png?raw=true)
 
-Listado de Productos
-![productos](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/productos.png?raw=true)
+Nosotros
+![productos](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/nosotros.png?raw=true)
+
+Galería
+![galeria](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/galeria.png?raw=true)
+
+Catálogo:
+![catalogo](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/catalogo.png?raw=true)
 
 Item:
 ![item](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/item.png?raw=true)
@@ -118,6 +139,8 @@ Carrito Compra:
 Formulario Compra:
 ![formulario](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/formularioCompra.png?raw=true)
 
+Contacto:
+![contacto](https://github.com/MarceloLuisMoreno/Refugio-Moreno/blob/main/public/assets/avanceProyecto/contacto.png?raw=true)
 ## Licencia
 
 - [MLM](https://www.linkedin.com/in/marceloluismoreno/)

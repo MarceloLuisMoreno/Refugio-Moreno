@@ -11,7 +11,7 @@ function ItemListContainer() {
 	const [items, setItems] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [messageErr, setmessageErr] = useState("")
-	
+
 	useEffect(() => {
 		const db = getFirestore()
 		const dbQuery =
